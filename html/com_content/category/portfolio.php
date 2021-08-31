@@ -67,7 +67,7 @@ $array_size = 0;
 				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
 
-			<div class="col-md-<?php echo $span ?>">
+			<div class="col-md-<?php echo $span ?>" style="margin: auto">
 				<?php
 				// Load category_item.php by default
 				$this->item = $item;
