@@ -55,10 +55,11 @@ $array_size = 0;
 		<?php if (count($categoria) <= $cols) :
 			$colunas_max = count($categoria);
 		else :
+
 			$colunas_max = round(count($categoria) / 2);
 			$colunas_max_two = floor(count($categoria) / 2);
 		endif; ?>
-		$key = 0;
+		<?php $key = 0; ?>
 		<?php foreach ($categoria as $item):?>
 
 			<?php if ($key % $colunas_max == 0 && $key < $colunas_max_two) : ?>
