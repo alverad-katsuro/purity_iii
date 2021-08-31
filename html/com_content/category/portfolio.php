@@ -56,8 +56,8 @@ $array_size = 0;
 			$colunas_max = count($categoria);
 		else :
 
-			$colunas_max = round(count($categoria) / 2);
-			$colunas_max_two = floor(count($categoria) / 2);
+			$colunas_max = round((count($categoria) / 2));
+			$colunas_max_two = floor((count($categoria) / 2));
 		endif; ?>
 		<?php $key = 0; ?>
 		<?php foreach ($categoria as $item):?>
@@ -67,7 +67,6 @@ $array_size = 0;
 				<div class="row row-porfolio">
 			<?php endif ?>
 
-			
 			<div class="col-md-<?php echo $span ?>">
 				<?php
 				// Load category_item.php by default
@@ -81,7 +80,7 @@ $array_size = 0;
 			<!-- // Row -->
 			<?php endif ?>
 
-			<?php if ((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) : ?>
+			<?php if (((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) && $key < $colunas_max_two) : ?>
 			</div>
 			<!-- // Row -->
 			<?php endif ?>
