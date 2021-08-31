@@ -64,7 +64,7 @@ $array_size = 0;
 
 			<?php if ($key % $colunas_max == 0 && ($key < $colunas_max_two || $colunas_max_two == 0)) : ?>
 				<!-- Row -->
-				<div class="row row-porfolio">
+				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
 
 			<div class="col-md-<?php echo $span ?>">
