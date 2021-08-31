@@ -37,7 +37,13 @@
            size="3"
            default="12"
             />
-
+<!--
+    <field name="num_columns" type="text"
+           description="JGLOBAL_NUM_COLUMNS_DESC"
+           label="JGLOBAL_NUM_COLUMNS_LABEL"
+           size="3"
+            />
+-->
     <field name="show_subcategory_content" type="list"
 
            description="JGLOBAL_SHOW_SUBCATEGORY_CONTENT_DESC"
