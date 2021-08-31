@@ -64,7 +64,7 @@ $array_size = 0;
 				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
 
-			<?php if (($key >= $colunas_max && $colunas_max_two != 0) && $key % $colunas_max_twox == 0) : ?>
+			<?php if (($key >= $colunas_max && $colunas_max_two != 0) && $key % $colunas_max_two == 0) : ?>
 				<!-- Row -->
 				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
