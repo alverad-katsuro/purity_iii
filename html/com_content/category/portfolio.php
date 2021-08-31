@@ -47,7 +47,7 @@ $array_size = 0;
 	<?php endforeach; ?>
 	<?php foreach ($categorias as $categoria):?>
 		<?php $span = floor(12.0 / floatval(count($categoria))); ?>
-		<h1 class=> <?php echo print_r(array_keys($categorias)[$array_size]) ?></h1>
+		<h1 class=> <?php echo (array_keys($categorias)[$array_size]) ?> </h1>
 		<?php if (count($categoria) < $cols) :
 			$colunas_max = count($categoria);
 		else :
