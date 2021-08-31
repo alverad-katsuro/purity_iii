@@ -80,7 +80,13 @@ $array_size = 0;
 			<!-- // Row -->
 			<?php endif ?>
 
-
+			
+			<?php if($colunas_max_two > 0) :  
+			if (((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) && $key < $colunas_max_two) : ?>
+			</div>
+			<!-- // Row -->
+				<?php endif ?>
+			<?php endif ?>
 
 		<?php $key++; endforeach; ?>
 	<?php $array_size++;endforeach; ?>
