@@ -18,7 +18,6 @@ $rootNode = $categories->get();
 $categoryNodes = $rootNode->getChildren(1);*/
 
 $cols = $this->params->get('num_columns', 3);
-$key = 0;
 $items = $this->items;
 $categorias = array();
 $array_size = 0;
@@ -49,22 +48,25 @@ $array_size = 0;
 		<?php if (count($categoria) >= 4) :
 			$span = floor(12.0 / floatval(count($categoria)));
 		else :
-			$span = floor(12.0 / count($categoria));
+			$span = floor(12.0 / 4.0);
 		endif;?>
 		<h1 class=> <?php echo (array_keys($categorias)[$array_size]) ?> </h1>
+
 		<?php if (count($categoria) <= $cols) :
 			$colunas_max = count($categoria);
 		else :
-			$colunas_max = $cols;
+			$colunas_max = round(count($categoria) / 2);
+			$colunas_max_two = floor(count($categoria) / 2);
 		endif; ?>
-
+		$key = 0;
 		<?php foreach ($categoria as $item):?>
 
-		<?php if ($key % $colunas_max == 0) : ?>
-			<!-- Row -->
-			<div class="row row-porfolio">
-		<?php endif ?>
+			<?php if ($key % $colunas_max == 0 && $key < $colunas_max_two) : ?>
+				<!-- Row -->
+				<div class="row row-porfolio">
+			<?php endif ?>
 
+			
 			<div class="col-md-<?php echo $span ?>">
 				<?php
 				// Load category_item.php by default
@@ -73,14 +75,18 @@ $array_size = 0;
 				?>
 			</div>
 
-			<?php if ((($key+1) % $colunas_max == 0) || $key+1 == count($this->items)) : ?>
+			<?php if (((($key+1) % $colunas_max == 0) || $key+1 == count($this->items) && $key < $colunas_max_two)) : ?>
 			</div>
 			<!-- // Row -->
-		<?php endif ?>
-			<?php
-			$key++;
-		endforeach; ?>
-		<?php $array_size++;endforeach; ?>
+			<?php endif ?>
+
+			<?php if ((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) : ?>
+			</div>
+			<!-- // Row -->
+			<?php endif ?>
+
+		<?php $key++; endforeach; ?>
+	<?php $array_size++;endforeach; ?>
 
 	</div>
 	<!-- // Item list -->
