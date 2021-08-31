@@ -2,7 +2,7 @@
 <!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
 <extension version="2.5" type="template" method="upgrade" client="site">
 	<name>purity_III</name>
-	<version>1.2.6</version>
+	<version>1.2.7</version>
 	<creationDate>Oct 07, 2020</creationDate>
 	<author>JoomlArt.com | Editor: Alfredo Gabriel</author>
 	<authorEmail>webmaster@joomlart.com | Editor: amgabriel1@hotmail.com</authorEmail>
