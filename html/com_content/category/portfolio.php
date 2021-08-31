@@ -11,11 +11,6 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-use Joomla\CMS\Categories\Categories;
-use Joomla\CMS\Categories\CategoryNode;
-/*$categories = Categories::getInstance("content");
-$rootNode = $categories->get();   
-$categoryNodes = $rootNode->getChildren(1);*/
 
 $cols = $this->params->get('num_columns', 3);
 $items = $this->items;
