@@ -27,7 +27,11 @@
 <fields name="params">
 <fieldset name="basic" label="Basic">
 
-    <field name="display_num" type="text"
+    <field name="layout_type" type="hidden" default="blog"/>
+    <field name="category_layout" type="hidden" default="_:features-intro"/>
+    <field name="num_leading_articles" type="hidden" default="0"/>
+    <field name="num_links" type="hidden" default="0"/>
+    <field name="num_intro_articles" type="text"
            description="Number of items"
            label="# Items"
            size="3"

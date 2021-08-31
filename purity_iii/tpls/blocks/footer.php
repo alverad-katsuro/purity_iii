@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 
 <!-- BACK TOP TOP BUTTON -->
 <div id="back-to-top" data-spy="affix" data-offset-top="300" class="back-to-top hidden-xs hidden-sm affix-top">
-  <button class="btn btn-primary" title="Back to Top"><i class="fa fa-caret-up"></i></button>
+  <button class="btn btn-primary" title="<?php echo JText::_('TPL_PURITY_III_BACKTOTOP'); ?>"><i class="fa fa-caret-up"></i></button>
 </div>
 <script type="text/javascript">
 (function($) {
@@ -19,6 +19,12 @@ defined('_JEXEC') or die;
 		$("html, body").animate({scrollTop: 0}, 500);
 		return false;
 	});
+    $(window).load(function(){
+        // hide button to top if the document height not greater than window height*2;using window load for more accurate calculate.    
+        if ((parseInt($(window).height())*2)>(parseInt($(document).height()))) {
+            $('#back-to-top').hide();
+        } 
+    });
 })(jQuery);
 </script>
 <!-- BACK TO TOP BUTTON -->
@@ -40,7 +46,7 @@ defined('_JEXEC') or die;
 				<div class="<?php echo $this->getParam('t3-rmvlogo', 1) ? 'col-md-8' : 'col-md-12' ?> copyright <?php $this->_c('footer') ?>">
 					<jdoc:include type="modules" name="<?php $this->_p('footer') ?>" />
           <small>
-            <a href="http://twitter.github.io/bootstrap/" target="_blank">Bootstrap</a> is a front-end framework of Twitter, Inc. Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>.
+            <a href="http://twitter.github.io/bootstrap/" title="Bootstrap by Twitter" target="_blank">Bootstrap</a> is a front-end framework of Twitter, Inc. Code licensed under <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE" title="MIT License" target="_blank">MIT License.</a>
           </small>
           <small>
             <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a> font licensed under <a href="http://scripts.sil.org/OFL">SIL OFL 1.1</a>.

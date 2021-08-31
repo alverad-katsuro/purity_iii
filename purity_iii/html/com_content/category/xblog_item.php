@@ -1,10 +1,12 @@
 <?php
-/**
- * @package     Joomla.Site
- * @subpackage  com_content
- *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ /**
+ *------------------------------------------------------------------------------
+ * @package Purity III Template - JoomlArt
+ * @version 1.0 Feb 1, 2014
+ * @author JoomlArt http://www.joomlart.com
+ * @copyright Copyright (c) 2004 - 2014 JoomlArt.com
+ * @license GNU General Public License version 2 or later;
+ *------------------------------------------------------------------------------
  */
 
 defined('_JEXEC') or die;
@@ -19,20 +21,20 @@ JHtml::_('behavior.framework');
 $params  = & $this->item->params;
 $images  = json_decode($this->item->images);
 $canEdit = $this->item->params->get('access-edit');
-$info    = $this->item->params->get('info_block_position', 0);
-$hasInfo = (($params->get('show_author') && !empty($this->item->author)) or
-			($params->get('show_category')) or
-			($params->get('show_create_date')) or
-			$params->get('show_publish_date') or
-			($params->get('show_parent_category'))) ||
-			($params->get('show_modify_date')) ||
-			($params->get('show_hits'));
-$hasCtrl = ($params->get('show_print_icon') ||
-			$params->get('show_email_icon') ||
-			$canEdit);
+$info    = $params->get('info_block_position', 2);
+$aInfo1 = ($params->get('show_publish_date') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author'));
+$aInfo2 = ($params->get('show_create_date') || $params->get('show_modify_date') || $params->get('show_hits'));
+$topInfo = ($aInfo1 && $info != 1) || ($aInfo2 && $info == 0);
+$botInfo = ($aInfo1 && $info == 1) || ($aInfo2 && $info != 0);
+$icons = $params->get('access-edit') || $params->get('show_print_icon') || $params->get('show_email_icon');
 
+// update catslug if not exists - compatible with 2.5
+if (empty ($this->item->catslug)) {
+  $this->item->catslug = $this->item->category_alias ? ($this->item->catid.':'.$this->item->category_alias) : $this->item->catid;
+}
 ?>
-<?php if ($this->item->state == 0) : ?>
+<?php if ($this->item->state == 0 || strtotime($this->item->publish_up) > strtotime(JFactory::getDate())
+|| ((strtotime($this->item->publish_down) < strtotime(JFactory::getDate())) && $this->item->publish_down != '0000-00-00 00:00:00' )) : ?>
 <div class="system-unpublished">
 	<?php endif; ?>
 
@@ -41,63 +43,27 @@ $hasCtrl = ($params->get('show_print_icon') ||
 
 		<!-- Intro image -->
 		<div class="col-md-4">
-			<?php if (isset($images->image_intro) and !empty($images->image_intro)) : ?>
-				<?php $imgfloat = (empty($images->float_intro)) ? $params->get('float_intro') : $images->float_intro; ?>
-				<div class="pull-<?php echo htmlspecialchars($imgfloat); ?> item-image article-image article-image-intro">
-					<img
-						<?php if ($images->image_intro_caption):
-							echo 'class="caption"' . ' title="' . htmlspecialchars($images->image_intro_caption) . '"';
-						endif; ?>
-						src="<?php echo htmlspecialchars($images->image_intro); ?>"
-						alt="<?php echo htmlspecialchars($images->image_intro_alt); ?>"/>
-				</div>
-			<?php endif; ?>
+      <?php echo JLayoutHelper::render('joomla.content.intro_image', $this->item); ?>
 		</div>
 
 		<div class="col-md-8">
-			<?php if ($params->get('show_title')) : ?>
-				<header class="article-header clearfix">
-					<h2 class="article-title">
-						<?php if ($params->get('link_titles') && $params->get('access-view')) : ?>
-							<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid)); ?>"> <?php echo $this->escape($this->item->title); ?></a>
-						<?php else : ?>
-							<?php echo $this->escape($this->item->title); ?>
-						<?php endif; ?>
-					</h2>
-				</header>
-			<?php endif; ?>
+      <?php if ($params->get('show_title')) : ?>
+        <?php echo JLayoutHelper::render('joomla.content.item_title', array('item' => $this->item, 'params' => $params, 'title-tag'=>'h2')); ?>
+      <?php endif; ?>
 
-			<!-- Aside -->
-			<?php if ($hasInfo || $hasCtrl) : ?>
-				<aside class="article-aside clearfix">
-
-					<?php // to do not that elegant would be nice to group the params ?>
-					<?php if ($hasInfo) : ?>
-						<?php echo JLayoutHelper::render('joomla.content.info_block.block', array('item' => $this->item, 'params' => $params, 'position' => 'above')); ?>
-					<?php endif; ?>
-
-					<?php if ($hasCtrl) : ?>
-						<div class="btn-group pull-right">
-							<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-cog"></i> <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-
-								<?php if ($params->get('show_print_icon')) : ?>
-									<li class="print-icon"> <?php echo JHtml::_('icon.print_popup', $this->item, $params); ?> </li>
-								<?php endif; ?>
-
-								<?php if ($params->get('show_email_icon')) : ?>
-									<li class="email-icon"> <?php echo JHtml::_('icon.email', $this->item, $params); ?> </li>
-								<?php endif; ?>
-
-								<?php if ($canEdit) : ?>
-									<li class="edit-icon"> <?php echo JHtml::_('icon.edit', $this->item, $params); ?> </li>
-								<?php endif; ?>
-							</ul>
-						</div>
-					<?php endif; ?>
-				</aside>
-			<?php endif; ?>
-			<!-- //Aside -->
+      <!-- Aside -->
+      <?php if ($topInfo || $icons) : ?>
+      <aside class="article-aside clearfix">
+        <?php if ($topInfo): ?>
+        <?php echo JLayoutHelper::render('joomla.content.info_block.block', array('item' => $this->item, 'params' => $params, 'position' => 'above')); ?>
+        <?php endif; ?>
+        
+        <?php if ($icons): ?>
+        <?php echo JLayoutHelper::render('joomla.content.icons', array('item' => $this->item, 'params' => $params)); ?>
+        <?php endif; ?>
+      </aside>  
+      <?php endif; ?>
+      <!-- //Aside -->
 
 			<section class="article-intro clearfix">
 				<?php if (!$params->get('show_intro')) : ?>
@@ -108,6 +74,14 @@ $hasCtrl = ($params->get('show_print_icon') ||
 
 				<?php echo $this->item->introtext; ?>
 			</section>
+      
+      <!-- footer -->
+      <?php if ($botInfo) : ?>
+      <footer class="article-footer clearfix">
+        <?php echo JLayoutHelper::render('joomla.content.info_block.block', array('item' => $this->item, 'params' => $params, 'position' => 'below')); ?>
+      </footer>
+      <?php endif; ?>
+      <!-- //footer -->
 
 			<?php if ($params->get('show_readmore') && $this->item->readmore) :
 				if ($params->get('access-view')) :
@@ -123,7 +97,7 @@ $hasCtrl = ($params->get('show_print_icon') ||
 				endif;
 				?>
 				<section class="readmore">
-					<a class="btn btn-default" href="<?php echo $link; ?>">
+					<a class="btn btn-default" href="<?php echo $link; ?>" itemprop="url">
 						<span>
 						<?php if (!$params->get('access-view')) :
 							echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
@@ -146,7 +120,8 @@ $hasCtrl = ($params->get('show_print_icon') ||
 	</article>
 	<!-- //Article -->
 
-	<?php if ($this->item->state == 0) : ?>
+<?php if ($this->item->state == 0 || strtotime($this->item->publish_up) > strtotime(JFactory::getDate())
+|| ((strtotime($this->item->publish_down) < strtotime(JFactory::getDate())) && $this->item->publish_down != '0000-00-00 00:00:00' )) : ?>
 </div>
 <?php endif; ?>
 

@@ -1,10 +1,12 @@
 <?php
-/**
- * @package     Joomla.Site
- * @subpackage  com_content
- *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ /**
+ *------------------------------------------------------------------------------
+ * @package Purity III Template - JoomlArt
+ * @version 1.0 Feb 1, 2014
+ * @author JoomlArt http://www.joomlart.com
+ * @copyright Copyright (c) 2004 - 2014 JoomlArt.com
+ * @license GNU General Public License version 2 or later;
+ *------------------------------------------------------------------------------
  */
 
 defined('_JEXEC') or die;
@@ -14,7 +16,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 JHtml::_('behavior.caption');
 $items = $this->items;
 ?>
-<div class="blog<?php echo $this->pageclass_sfx;?>">
+<div class="blog<?php echo $this->pageclass_sfx;?>" itemscope itemtype="http://schema.org/Blog">
 	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 		<div class="page-header">
 			<h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
@@ -30,8 +32,7 @@ $items = $this->items;
 	<?php endif; ?>
 
 	<?php if ($this->params->get('show_tags', 1) && !empty($this->category->tags->itemTags)) : ?>
-		<?php $this->category->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
-		<?php echo $this->category->tagLayout->render($this->category->tags->itemTags); ?>
+		<?php echo JLayoutHelper::render('joomla.content.tags', $this->category->tags->itemTags); ?>
 	<?php endif; ?>
 
 	<?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
@@ -49,7 +50,7 @@ $items = $this->items;
 	<?php if (!empty($items)) : ?>
 		<div class="blog-items clearfix">
 			<?php foreach ($items as &$item) : ?>
-				<div class="row blog-item<?php echo $item->state == 0 ? ' system-unpublished' : ''; ?>">
+				<div class="row blog-item<?php echo $item->state == 0 ? ' system-unpublished' : ''; ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 					<?php
 					$this->item = &$item;
 					echo $this->loadTemplate('item');

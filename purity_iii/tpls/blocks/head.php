@@ -59,3 +59,6 @@ if (is_file(T3_TEMPLATE_PATH . '/css/custom.css')) {
 
 <!-- You can add Google Analytics here or use T3 Injection feature -->
 
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="<?php echo T3_TEMPLATE_URL ?>/css/ie8.css" type="text/css" />
+<![endif]-->

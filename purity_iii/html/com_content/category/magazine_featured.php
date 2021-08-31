@@ -1,12 +1,14 @@
 <?php
-/**
- * @package     Joomla.Site
- * @subpackage  com_content
- *
- * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ /**
+ *------------------------------------------------------------------------------
+ * @package Purity III Template - JoomlArt
+ * @version 1.0 Feb 1, 2014
+ * @author JoomlArt http://www.joomlart.com
+ * @copyright Copyright (c) 2004 - 2014 JoomlArt.com
+ * @license GNU General Public License version 2 or later;
+ *------------------------------------------------------------------------------
  */
-
+ 
 defined('_JEXEC') or die;
 
 // get featured items
@@ -14,6 +16,7 @@ $params        = $this->params;
 $count_leading = $params->get ('featured_leading', 1);
 $count_intro   = $params->get ('featured_intro', 3);
 $intro_columns = $params->get ('featured_intro_columns', 3);
+$featured_links= $params->get ('featured_links', 5);
 $leading       = $intro = $links = array();
 
 $dispatcher    = JEventDispatcher::getInstance();
@@ -46,7 +49,7 @@ foreach ($this->items as &$item) {
 		$leading[] = $item;
 	} elseif ($i < $count_leading + $count_intro) {
 		$intro[] = $item;
-	} else {
+	} elseif ($i < $count_leading + $count_intro + $featured_links) {
 		$links[] = $item;
 	}
 
@@ -184,10 +187,10 @@ $info_positions = $params->get('featured_info_positions', array());
 								<?php echo $item->event->beforeDisplayContent; ?>
 								<?php echo $item->event->afterDisplayContent; ?>
 							</div>
-					<?php if(($intro_index % $intro_columns == 0 && $intro_index > 0) || $intro_index == $intro_count -1) : ?>
+					<?php $intro_index++; ?>
+					<?php if(($intro_index % $intro_columns == 0) || $intro_index == $intro_count) : ?>
 						</div>
 					<?php endif ?>
-					<?php $intro_index++; ?>
 				<?php endforeach; ?>
 			</div>
 		<?php endif ?>
