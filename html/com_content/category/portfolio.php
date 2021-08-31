@@ -62,7 +62,7 @@ $array_size = 0;
 		<?php $key = 0; ?>
 		<?php foreach ($categoria as $item):?>
 
-			<?php if ($key % $colunas_max == 0 && $key < $colunas_max_two) : ?>
+			<?php if ($key % $colunas_max == 0 && $key <= $colunas_max_two) : ?>
 				<!-- Row -->
 				<div class="row row-porfolio">
 			<?php endif ?>
