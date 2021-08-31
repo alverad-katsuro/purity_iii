@@ -145,7 +145,7 @@
             type="extension"
             priority="2"
             name="Update of Github@alverad-katsuro">
-            https://raw.githubusercontent.com/snoeren-development/joomla-update-server/master/updates.xml
+            https://raw.githubusercontent.com/alverad-katsuro/purity_iii/master/updates.xml
         </server>
 	</updateservers>
 
