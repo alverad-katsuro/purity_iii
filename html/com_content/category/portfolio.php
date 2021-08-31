@@ -47,7 +47,7 @@ $array_size = 0;
 		endif;?>
 		<h1 class=> <?php echo (array_keys($categorias)[$array_size]) ?> </h1>
 
-		<?php if (count($categoria) <= 7) :
+		<?php if (count($categoria) < 7) :
 			$colunas_max = count($categoria);
 			$colunas_max_two = 0;
 		else :
