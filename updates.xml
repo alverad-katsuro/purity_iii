@@ -2,7 +2,7 @@
     <update>
         <name>Update of Github@alverad-katsuro</name>
         <description></description>
-        <element>mod_updateserver</element>
+        <element>purity_iii</element>
         <type>template</type>
         <version>1.2.6</version>
         <client>0</client>
@@ -19,6 +19,6 @@
         </tags>
         <maintainer>Alverad Katsuro Development</maintainer>
         <maintainerurl>https://alverad-katsuro.github.io/Portfolio/</maintainerurl>
-        <targetplatform name="joomla" version="[34].[0123456789]" />
+        <targetplatform name="joomla" version=".*" />
     </update>
 </updates>
