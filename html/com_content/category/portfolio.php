@@ -41,7 +41,7 @@ $array_size = 0;
 	<?php endforeach; ?>
 	<?php foreach ($categorias as $categoria):?>
 		<?php if (count($categoria) >= 4) :
-			$span = floor(12.0 / floatval(count($categoria)));
+			$span = floor(12.0 / 4.0);
 		else :
 			$span = floor(12.0 / 4.0);
 		endif;?>
@@ -62,6 +62,11 @@ $array_size = 0;
 				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
 
+			<?php if ($key % $colunas_max_twox == 0 && ($key >= $colunas_max && $colunas_max_two != 0)) : ?>
+				<!-- Row -->
+				<div class="row row-porfolio" style="display: flex;">
+			<?php endif ?>
+
 			<div class="col-md-<?php echo $span ?>" style="margin: auto">
 				<?php
 				// Load category_item.php by default
@@ -76,10 +81,10 @@ $array_size = 0;
 			<?php endif ?>
 
 			
-			<?php if($colunas_max_two > 0) :  
-			if (((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) && $key < $colunas_max_two) : ?>
-			</div>
-			<!-- // Row -->
+			<?php if($colunas_max_two > 0) : ?>
+				<?php if (((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) && $key < $colunas_max_two) : ?>
+					</div>
+					<!-- // Row -->
 				<?php endif ?>
 			<?php endif ?>
 
