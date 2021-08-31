@@ -49,7 +49,7 @@ $array_size = 0;
 		<?php if (count($categoria) >= 4) :
 			$span = floor(12.0 / floatval(count($categoria)));
 		else :
-			$span = floor(12.0 / 4.0);
+			$span = floor(12.0 / count($categoria));
 		endif;?>
 		<h1 class=> <?php echo (array_keys($categorias)[$array_size]) ?> </h1>
 		<?php if (count($categoria) <= $cols) :
