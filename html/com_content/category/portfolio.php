@@ -54,8 +54,6 @@ $array_size = 0;
 			$colunas_max = round((count($categoria) / 2));
 			$colunas_max_two = floor((count($categoria) / 2));
 		endif; ?>
-		<h1> <?php echo $colunas_max; ?></h1>
-		<h1> <?php echo $colunas_max_two; ?></h1>
 		<?php $key = 0; ?>
 		<?php foreach ($categoria as $item):?>
 
