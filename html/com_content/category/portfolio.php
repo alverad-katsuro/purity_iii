@@ -49,8 +49,8 @@ $array_size = 0;
 
 		<?php if (count($categoria) <= $cols) :
 			$colunas_max = count($categoria);
+			$colunas_max_two = 0;
 		else :
-
 			$colunas_max = round((count($categoria) / 2));
 			$colunas_max_two = floor((count($categoria) / 2));
 		endif; ?>
@@ -59,12 +59,12 @@ $array_size = 0;
 		<?php $key = 0; ?>
 		<?php foreach ($categoria as $item):?>
 
-			<?php if (($key < $colunas_max_two || $colunas_max_two == 0) && $key % $colunas_max == 0) : ?>
+			<?php if (($key < $colunas_max || $colunas_max_two == 0) && $key % $colunas_max == 0) : ?>
 				<!-- Row -->
 				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
 
-			<?php if (($key >= $colunas_max && $colunas_max_two != 0) && $key % $colunas_max_two == 0) : ?>
+			<?php if (($colunas_max_two != 0 && $key >= $colunas_max) && ($key - $colunas_max) % $colunas_max_two == 0) : ?>
 				<!-- Row -->
 				<div class="row row-porfolio" style="display: flex;">
 			<?php endif ?>
@@ -77,14 +77,14 @@ $array_size = 0;
 				?>
 			</div>
 
-			<?php if (((($key+1) % $colunas_max == 0) || $key+1 == count($this->items) && $key < $colunas_max_two)) : ?>
+			<?php if (((($key+1) % $colunas_max == 0) || $key+1 == count($this->items) && $key < $colunas_max)) : ?>
 			</div>
 			<!-- // Row -->
 			<?php endif ?>
 
 			
-			<?php if($colunas_max_two > 0) : ?>
-				<?php if (((($key+1) % $colunas_max_two == 0) || $key+1 == count($this->items)) && $key < $colunas_max_two) : ?>
+			<?php if($colunas_max_two != 0) : ?>
+				<?php if ($key >= $colunas_max && ((($key+1-$colunas_max) % $colunas_max_two == 0) || $key+1-$colunas_max == count($this->items))) : ?>
 					</div>
 					<!-- // Row -->
 				<?php endif ?>
